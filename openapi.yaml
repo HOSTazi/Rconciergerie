@@ -1,0 +1,51 @@
+openapi: 3.1.0
+info:
+  title: Web Development Assistant API
+  description: Cette API aide à générer du code pour le développement de pages web.
+  version: 1.0.0
+servers:
+  - url: http://api.webdevassistant.com/v1
+    description: Serveur principal de l'assistant de développement web
+paths:
+  /generateComponent:
+    post:
+      operationId: generateComponentCode
+      summary: Génère le code pour un composant de page web.
+      description: Cette opération génère du code HTML/CSS basé sur les détails fournis du composant de la page.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                componentType:
+                  type: string
+                  description: Le type du composant (par exemple, "button", "header", "form").
+                stylePreferences:
+                  type: object
+                  description: Les préférences de style pour le composant.
+                  properties:
+                    color:
+                      type: string
+                      description: Couleur du composant (en valeur hexadécimale ou nom).
+                    size:
+                      type: string
+                      description: Taille du composant (par exemple, "small", "medium", "large").
+                content:
+                  type: string
+                  description: Contenu du composant, s'il y en a (par exemple, texte d'un bouton).
+      responses:
+        '200':
+          description: Code HTML/CSS généré pour le composant.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  html:
+                    type: string
+                    description: Code HTML du composant généré.
+                  css:
+                    type: string
+                    description: Code CSS associé pour le composant.
